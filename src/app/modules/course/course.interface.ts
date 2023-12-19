@@ -1,4 +1,6 @@
-interface TTag {
+import { Schema } from "mongoose";
+
+export interface TTag {
   name: string;
   isDeleted: boolean;
 }
@@ -6,7 +8,7 @@ interface TTag {
 export interface TCourse {
   title: string;
   instructor: string;
-  categoryId: string;
+  categoryId: Schema.Types.ObjectId;
   price: number;
   tags: TTag[];
   startDate: string;
