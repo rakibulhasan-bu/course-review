@@ -11,4 +11,10 @@ courseRouter.post(
   courseControllers.createCourse,
 );
 
+courseRouter.put(
+  "/courses/:courseId",
+  validateRequest(courseValidation.updateCourseValidationSchema),
+  courseControllers.updateCourse,
+);
+
 export default courseRouter;

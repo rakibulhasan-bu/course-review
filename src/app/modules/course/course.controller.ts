@@ -11,4 +11,13 @@ const createCourse = CatchAsyncError(async (req: Request, res: Response) => {
   });
 });
 
-export const courseControllers = { createCourse };
+const updateCourse = CatchAsyncError(async (req: Request, res: Response) => {
+  const course = req.body;
+  const result = await courseServices.createCourseIntoDB(course);
+  res.status(200).json({
+    message: "course created successfully",
+    result,
+  });
+});
+
+export const courseControllers = { createCourse, updateCourse };
