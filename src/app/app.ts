@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
-import { courseRouter } from "./modules/course/course.router";
+import courseRouter from "./modules/course/course.router";
+import categoryRoute from "./modules/category/category.route";
 
 const app: Application = express();
 
@@ -9,7 +10,7 @@ app.use(express.json());
 app.use(cors());
 
 //application routes
-app.use("/api", courseRouter);
+app.use("/api", courseRouter, categoryRoute);
 
 app.get("/", (_req: Request, res: Response) => {
   res.send(`Course Review server is working perfectly`);

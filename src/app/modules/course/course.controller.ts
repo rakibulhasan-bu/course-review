@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CatchAsyncError } from "../../utils/catchAsyncError";
+import { CatchAsyncError } from "../../utils/CatchAsyncError";
 import { courseServices } from "./course.service";
 
 const createCourse = CatchAsyncError(async (req: Request, res: Response) => {
