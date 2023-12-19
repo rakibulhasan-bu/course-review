@@ -1,6 +1,14 @@
 import express from "express";
 import { courseControllers } from "./course.controller";
+import { courseValidation } from "./course.validation";
+import validateRequest from "../../middleware/validateRequest";
 
-export const courseRouter = express.Router();
+const courseRouter = express.Router();
 
-courseRouter.post("/course", courseControllers.createCourse);
+courseRouter.post(
+  "/course",
+  validateRequest(courseValidation.createCourseValidationSchema),
+  courseControllers.createCourse,
+);
+
+export default courseRouter;
