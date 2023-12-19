@@ -11,4 +11,6 @@ categoryRoute.post(
   categoryController.createCategory,
 );
 
+categoryRoute.get("/categories", categoryController.getAllCategory);
+
 export default categoryRoute;

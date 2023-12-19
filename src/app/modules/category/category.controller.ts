@@ -11,6 +11,15 @@ const createCategory = CatchAsyncError(async (req: Request, res: Response) => {
   });
 });
 
+const getAllCategory = CatchAsyncError(async (req: Request, res: Response) => {
+  const result = await categoryServices.getAllCategoryFromDB();
+  res.status(200).json({
+    message: "category created",
+    result,
+  });
+});
+
 export const categoryController = {
   createCategory,
+  getAllCategory,
 };
