@@ -1,6 +1,8 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import router from "./router";
+import notFoundRoute from "./middleware/notFoundRoute";
+import globalErrorHandler from "./middleware/globalErrorHandler";
 
 const app: Application = express();
 
@@ -17,15 +19,9 @@ app.get("/", (_req: Request, res: Response) => {
 });
 
 // unknown route handling
-app.all("*", (req, res) => {
-  res.status(400).json({
-    success: false,
-    message: `Route ${req.originalUrl} cannot found`,
-    error: {
-      code: 404,
-      description: "Please provide an valid Route",
-    },
-  });
-});
+app.all("*", notFoundRoute);
+
+//global error handling
+app.use(globalErrorHandler);
 
 export default app;
