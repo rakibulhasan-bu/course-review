@@ -5,4 +5,8 @@ const createCourseIntoDB = async (course: TCourse) => {
   return await Course.create(course);
 };
 
-export const courseServices = { createCourseIntoDB };
+const getCourseWithReviewFromDB = async (courseId: string) => {
+  return await Course.findById(courseId);
+};
+
+export const courseServices = { createCourseIntoDB, getCourseWithReviewFromDB };

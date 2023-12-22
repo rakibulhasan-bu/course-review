@@ -11,6 +11,11 @@ courseRouter.post(
   courseControllers.createCourse,
 );
 
+courseRouter.get(
+  "/courses/:courseId/reviews",
+  courseControllers.getCourseWithReview,
+);
+
 courseRouter.put(
   "/courses/:courseId",
   validateRequest(courseValidation.updateCourseValidationSchema),

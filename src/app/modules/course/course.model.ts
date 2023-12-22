@@ -64,20 +64,19 @@ const CourseSchema = new Schema<TCourse>({
   },
 });
 
-// CourseSchema.post("save", function (doc) {
-//   doc.durationInWeeks = Math.ceil(
-//     Math.abs(doc.endDate - doc.startDate) / (1000 * 60 * 60 * 24 * 7),
-//   );
-//   doc.save();
-// });
+CourseSchema.pre("save", async function () {
+  const startDate: Date = new Date(this.startDate);
+  const endDate: Date = new Date(this.endDate);
+
+  // Subtract dates to get the difference in milliseconds.
+  const differenceInMilliseconds: number =
+    endDate.getTime() - startDate.getTime();
+
+  this.durationInWeeks = Math.ceil(
+    differenceInMilliseconds / (1000 * 60 * 60 * 24 * 7),
+  );
+});
 
 const Course = model("Course", CourseSchema);
 
 export default Course;
-
-// get: function () {
-//   const diffInDays = Math.floor(
-//     Math.abs(this.endDate - this.startDate) / (1000 * 60 * 60 * 24),
-//   );
-//   return Math.ceil(diffInDays / 7);
-// },
