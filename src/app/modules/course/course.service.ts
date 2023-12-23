@@ -1,15 +1,11 @@
 import { TCourse } from "./course.interface";
 import Course from "./course.model";
 
-const createCourseIntoDB = async (course: TCourse) => {
+const createCourse = async (course: TCourse) => {
   return await Course.create(course);
 };
 
-const getAllCourseFromDB = async () => {
-  return await Course.find();
-};
-
-const getCourseFromDB = async (query: Record<string, unknown>) => {
+const getAllCourse = async (query: Record<string, unknown>) => {
   const {
     page = 1,
     limit = 10,
@@ -74,11 +70,11 @@ const getCourseFromDB = async (query: Record<string, unknown>) => {
   };
 };
 
-const getCourseWithReviewFromDB = async (courseId: string) => {
+const getSingleCourse = async (courseId: string) => {
   return await Course.findById(courseId);
 };
 
-const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
+const updateCourse = async (id: string, payload: Partial<TCourse>) => {
   const { tags, details, ...remainingData } = payload;
   const modifiedData: Record<string, unknown> = { ...remainingData };
 
@@ -100,9 +96,8 @@ const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
 };
 
 export const courseServices = {
-  createCourseIntoDB,
-  getAllCourseFromDB,
-  getCourseFromDB,
-  getCourseWithReviewFromDB,
-  updateCourseIntoDB,
+  createCourse,
+  getAllCourse,
+  getSingleCourse,
+  updateCourse,
 };

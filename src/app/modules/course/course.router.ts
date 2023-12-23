@@ -18,7 +18,9 @@ courseRouter.get(
   courseControllers.getCourseWithReview,
 );
 
-courseRouter.patch(
+courseRouter.get("/course/best", courseControllers.getBestCourse);
+
+courseRouter.put(
   "/courses/:courseId",
   validateRequest(courseValidation.updateCourseValidationSchema),
   courseControllers.updateCourse,

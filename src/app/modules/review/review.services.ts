@@ -2,11 +2,29 @@ import { TReview } from "./review.interface";
 import Review from "./review.model";
 
 const createReviewIntoDB = async (reviewData: TReview) => {
-  const user = new Review(reviewData);
+  return await Review.create(reviewData);
+};
 
-  const result = await user.save();
-  return result;
+const highestReviews = async () => {
+  const reviews = await Review.aggregate([
+    {
+      $group: {
+        _id: "$courseId",
+        reviewCount: { $sum: 1 },
+        averageRating: { $avg: "$rating" },
+      },
+    },
+    { $sort: { averageRating: -1 } },
+  ]);
+  const highestAverageRating = reviews[0];
+  return highestAverageRating;
+};
+
+const getReviewByCourseID = async (courseId: string) => {
+  return await Review.find({ courseId });
 };
 export const reviewService = {
   createReviewIntoDB,
+  getReviewByCourseID,
+  highestReviews,
 };
