@@ -1,8 +1,8 @@
-# assignment server-L2
+# Course-crud
 
 Server Live Link
 
-### https://user-crud-pi.vercel.app/
+### https://course-review-ochre.vercel.app/
 
 ## Run the server application locally
 
@@ -18,34 +18,34 @@ If you want to run the server locally on your computer, firstly clone this proje
 
 ## Server API
 
-### 1. Create a new user
+### 1. Create a new Course
 
-Endpoint: POST `/api/users`
+Endpoint: POST `/api/course`
 
 ### 2. Retrieve a list of all users
 
-Endpoint: GET `/api/users`
+Endpoint: GET `/api/course`
 
-### 3. Retrieve a specific user by ID
+### 3. Get Course by ID with Reviews\*\*
 
-Endpoint: GET `/api/users/:userId`
+Endpoint: GET `/api/courses/:courseId/reviews`
 
-### 4. Update user information
+### 4. Update Course information
 
-Endpoint: PUT `/api/users/:userId`
+Endpoint: PUT `/api/courses/:courseId`
 
-### 5. Delete a user
+### 5. Create a categories
 
-Endpoint: DELETE `/api/users/:userId`
+Endpoint: POST `/api/categories`
 
 ### 6. Add New Product of Order in user
 
-Endpoint: PUT `/api/users/:userId/orders`
+Endpoint: GET `/api/categories`
 
-### 7. Retrieve all orders for a specific user
+### 7. Create a reviews
 
-Endpoint: GET `/api/users/:userId/orders`
+Endpoint: POST `/api/reviews`
 
-### 8. Calculate Total Price of Orders for a Specific User
+### 8. Get the Best Course Based on Average Review (Rating)
 
-Endpoint: GET `/api/users/:userId/orders/total-price`
+Endpoint: GET `/api/course/best`
