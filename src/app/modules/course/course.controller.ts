@@ -14,6 +14,17 @@ const createCourse = CatchAsyncError(async (req: Request, res: Response) => {
   });
 });
 
+const getAllCourse = CatchAsyncError(async (req: Request, res: Response) => {
+  const result = await courseServices.getCourseFromDB(req.query);
+  res.status(201).json({
+    success: true,
+    statusCode: 201,
+    message: "course created successfully",
+    meta: result.meta,
+    data: result.data,
+  });
+});
+
 const getCourseWithReview = CatchAsyncError(
   async (req: Request, res: Response) => {
     const { courseId } = req.params;
@@ -38,6 +49,7 @@ const updateCourse = CatchAsyncError(async (req: Request, res: Response) => {
 
 export const courseControllers = {
   createCourse,
+  getAllCourse,
   getCourseWithReview,
   updateCourse,
 };

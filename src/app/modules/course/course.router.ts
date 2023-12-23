@@ -11,6 +11,8 @@ courseRouter.post(
   courseControllers.createCourse,
 );
 
+courseRouter.get("/courses", courseControllers.getAllCourse);
+
 courseRouter.get(
   "/courses/:courseId/reviews",
   courseControllers.getCourseWithReview,
