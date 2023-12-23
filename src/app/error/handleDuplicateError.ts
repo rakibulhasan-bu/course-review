@@ -3,7 +3,7 @@ const handleDuplicateError = (err: { message: string }) => {
 
   const extractedId = match && match[1];
 
-  const errorMessage = `${extractedId}  is not a valid ID!`;
+  const errorMessage = `${extractedId} this value is already taken, This field id unique!`;
 
   const statusCode = 400;
 
@@ -20,7 +20,7 @@ const handleDuplicateError = (err: { message: string }) => {
 
   return {
     statusCode,
-    message: "Invalid ID",
+    message: "Duplicate value",
     errorMessage,
     errorDetails,
   };
