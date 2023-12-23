@@ -6,5 +6,6 @@ export interface TErrorSources {
 export interface TErrorResponse {
   statusCode: number;
   message: string;
-  errorSources: TErrorSources[];
+  errorMessage: string;
+  errorDetails: unknown;
 }

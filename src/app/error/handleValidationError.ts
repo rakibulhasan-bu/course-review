@@ -5,7 +5,7 @@ const handleValidationError = (
   error: Error.ValidationError,
 ): TErrorResponse => {
   const statusCode = 400;
-  const errorSources: TErrorSources[] = Object.values(error?.errors).map(
+  const errorDetails: TErrorSources[] = Object.values(error?.errors).map(
     (value: Error.ValidatorError | Error.CastError) => {
       return {
         path: value?.path,
@@ -13,10 +13,15 @@ const handleValidationError = (
       };
     },
   );
+  const errorMessage = errorDetails.reduce(
+    (acc, curr) => acc + ` ${curr.path} is required.`,
+    "",
+  );
   return {
     statusCode,
     message: error?.message,
-    errorSources,
+    errorMessage,
+    errorDetails,
   };
 };
 export default handleValidationError;
