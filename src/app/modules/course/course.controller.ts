@@ -19,7 +19,7 @@ const getAllCourse = CatchAsyncError(async (req: Request, res: Response) => {
   res.status(201).json({
     success: true,
     statusCode: 201,
-    message: "course created successfully",
+    message: "Courses retrieved successfully",
     meta: result.meta,
     data: result.data,
   });
@@ -39,11 +39,14 @@ const getCourseWithReview = CatchAsyncError(
 );
 
 const updateCourse = CatchAsyncError(async (req: Request, res: Response) => {
-  const course = req.body;
-  const result = await courseServices.createCourseIntoDB(course);
+  const { courseId } = req.params;
+
+  const result = await courseServices.updateCourseIntoDB(courseId, req.body);
   res.status(200).json({
-    message: "course created successfully",
-    result,
+    success: true,
+    statusCode: 200,
+    message: "Course updated successfully",
+    data: result,
   });
 });
 

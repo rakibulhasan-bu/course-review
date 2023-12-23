@@ -78,9 +78,31 @@ const getCourseWithReviewFromDB = async (courseId: string) => {
   return await Course.findById(courseId);
 };
 
+const updateCourseIntoDB = async (id: string, payload: Partial<TCourse>) => {
+  const { tags, details, ...remainingData } = payload;
+  const modifiedData: Record<string, unknown> = { ...remainingData };
+
+  if (tags && Object.keys(tags).length) {
+    for (const [key, value] of Object.entries(tags)) {
+      modifiedData[`tags.${key}`] = value;
+    }
+  }
+  if (details && Object.keys(details).length) {
+    for (const [key, value] of Object.entries(details)) {
+      modifiedData[`details.${key}`] = value;
+    }
+  }
+
+  return await Course.findByIdAndUpdate(id, modifiedData, {
+    new: true,
+    runValidators: true,
+  });
+};
+
 export const courseServices = {
   createCourseIntoDB,
   getAllCourseFromDB,
   getCourseFromDB,
   getCourseWithReviewFromDB,
+  updateCourseIntoDB,
 };
